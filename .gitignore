@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 运行产物（不要把抓下来的东西提交上去）
+reports/
+seen_links.json
+_fixture/
+_quarantine_*/
+_annual_diff_out/
+_annual_diff_cache/
+*.log
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

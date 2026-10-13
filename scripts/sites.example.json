@@ -1,0 +1,69 @@
+[
+  {
+    "name": "Fed-美联储",
+    "category": "宏观经济",
+    "list_url": "https://www.federalreserve.gov/feeds/press_all.xml",
+    "use_rss": true,
+    "//": "★ 实测：Fed 的 RSS 链接包在 CDATA 里（<link><![CDATA[url]]></link>）→ 必须容忍 CDATA，并用 (?!feeds/) 排除频道自身的 link",
+    "link_pattern": "<link>(?:<!\\[CDATA\\[)?(https://www\\.federalreserve\\.gov/(?!feeds/)[^<\\]]+)",
+    "pdf_pattern": "href=\"([^\"]+\\.pdf)\"",
+    "pdf_only": true,
+    "pdf_same_host_only": true,
+    "//title": "★ 实测：Fed 详情页 <h1> 是站点外壳名（所有页面同名）→ 必须改从 <title> 取，否则 N 个链接只落 1 个文件",
+    "title_from": "title",
+    "via_node": false,
+    "_coverage_grade": "官方一手"
+  },
+  {
+    "name": "NBER-美国经济研究局",
+    "category": "宏观经济",
+    "base_url": "https://www.nber.org",
+    "list_url": "https://www.nber.org/papers",
+    "link_pattern": "href=\"(/papers/w\\d+)\"",
+    "pdf_pattern": "href=\"([^\"]+\\.pdf)\"",
+    "pdf_only": true,
+    "via_node": false,
+    "_coverage_grade": "工作论文"
+  },
+  {
+    "name": "Example-带分页的机构",
+    "category": "示例大类",
+    "base_url": "https://www.example.org",
+    "list_url": "https://www.example.org/research/",
+    "list_urls": [
+      "https://www.example.org/research/",
+      "https://www.example.org/research/page/2/"
+    ],
+    "link_pattern": "href=\"(/research/[a-z0-9-]{20,}/)\"",
+    "pdf_pattern": "href=\"([^\"]+\\.pdf)\"",
+    "pdf_only": true,
+    "pdf_same_host_only": true,
+    "title_from": "title",
+    "title_strip_prefix": "Example Organization_",
+    "via_node": true,
+    "node_retries": 8,
+    "_coverage_grade": "公开Insights"
+  },
+  {
+    "name": "Example-SPA站点",
+    "category": "示例大类",
+    "base_url": "https://spa.example.org",
+    "list_url": "https://spa.example.org/publications",
+    "use_js": true,
+    "js_wait_ms": 4000,
+    "link_pattern": "href=\"(/publications/[^\"]+)\"",
+    "pdf_pattern": "href=\"([^\"]+\\.pdf)\"",
+    "via_node": false
+  },
+  {
+    "name": "Example-sitemap站点",
+    "category": "示例大类",
+    "base_url": "https://old.example.org",
+    "list_url": "https://old.example.org/sitemap.xml",
+    "use_text": true,
+    "link_pattern": "<loc>(https://old\\.example\\.org/publications/[^<]+)</loc>",
+    "pdf_pattern": "href=\"([^\"]+\\.pdf)\"",
+    "via_node": true,
+    "node_retries": 20
+  }
+]
